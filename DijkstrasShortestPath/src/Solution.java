@@ -30,7 +30,7 @@ public class Solution {
 
 			// loop through input and add all edges
 			for (int e = 0; e < eCount; e++) {
-				parseEdge(in, vertexes, pq);
+				parseEdge(in, vertexes);
 			}
 
 			// grab the source vertex
@@ -74,6 +74,12 @@ public class Solution {
 		}
 	}
 
+	/**
+	 * Function:		fillPriorityQueue(pq, vertexes)
+	 * Description:		Loops through the priority queue and fills it with Vertex objects
+	 * @param pq		The PriorityQueue to fill
+	 * @param vertexes	The array of Vertex objects to fill add to the PriorityQueue
+	 */
 	private static void fillPriorityQueue(PriorityQueue<Vertex> pq, Vertex[] vertexes) {
 		for (int i = 0; i < vertexes.length; i++) {
 			pq.add(vertexes[i]);
@@ -81,6 +87,12 @@ public class Solution {
 
 	}
 
+	/**
+	 * Function:		printResults(vertexes, source)
+	 * Description:		Loops through and prints the distance from the source vertex
+	 * @param vertexes	The array of Vertex objects to loop through and print distances for
+	 * @param source	The key of the Vertex object from which all distances are measured
+	 */
 	private static void printResults(Vertex[] vertexes, int source) {
 		StringBuffer buff = new StringBuffer();
 		// loop through and print all the distances
@@ -97,7 +109,16 @@ public class Solution {
 		System.out.println(buff.toString().trim());
 	}
 
-	private static void parseEdge(Scanner in, Vertex[] vertexes, PriorityQueue<Vertex> pq) {
+	/**
+	 * Function:		parseEdge(in, vertexes, pq)
+	 * Description:		Reads a line of input and adds to Vertex adjacency lists if the weight
+	 * 					of the edge is less than the existing edge, or if no edge already exists
+	 * 					between the two Vertex objects
+	 * 
+	 * @param in		The Scanner object to read input from		
+	 * @param vertexes	The array of Vertex objects to modify
+	 */
+	private static void parseEdge(Scanner in, Vertex[] vertexes) {
 		int s = in.nextInt() - 1;
 		int t = in.nextInt() - 1;
 		int weight = in.nextInt();
@@ -117,7 +138,13 @@ public class Solution {
 	}
 }
 
-
+/**
+ * Class:			Vertex
+ * Description:		A representation of a graph Vertex which stores an adjacency list and it's
+ * 					distance from a given source Vertex
+ * @author jarryd
+ *
+ */
 class Vertex implements Comparable<Vertex> {
 	public HashMap<Integer, Integer> adjacents;
 	public int distance;
